@@ -1,0 +1,35 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Folder Include="Feature\Auth\Mapping\" />
+    <Folder Include="Feature\Auth\Request\Queries\" />
+    <Folder Include="Feature\Party\Mapping\" />
+    <Folder Include="Feature\Party\Handler\" />
+    <Folder Include="Feature\Party\Request\Command\" />
+    <Folder Include="Feature\Party\Request\Query\" />
+    <Folder Include="Feature\Party\Result\" />
+    <Folder Include="Feature\Party\Validator\" />
+    <Folder Include="Feature\User\Handler\Query\" />
+    <Folder Include="Feature\User\Result\" />
+    <Folder Include="Middleware\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="13.0.1" />
+    <PackageReference Include="FluentValidation" Version="11.10.0" />
+    <PackageReference Include="FluentValidation.DependencyInjectionExtensions" Version="11.10.0" />
+    <PackageReference Include="MediatR" Version="12.4.1" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.10" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Core\Domain.csproj" />
+  </ItemGroup>
+</Project>
