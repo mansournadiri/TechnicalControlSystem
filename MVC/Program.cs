@@ -1,17 +1,16 @@
 using Application;
 using Persistence;
+using Common;
 
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddApplicationDependencies();
 builder.Services.AddPersistenceDependencies(builder.Configuration);
-
-// Add services to the container.
+builder.Services.AddCommonDependencies();
 builder.Services.AddControllersWithViews();
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
 {
     app.UseExceptionHandler("/Home/Error");
@@ -20,6 +19,7 @@ app.UseStaticFiles();
 
 app.UseRouting();
 
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllerRoute(

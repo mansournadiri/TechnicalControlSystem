@@ -10,6 +10,9 @@ using System.Text;
 using Application.Model;
 using Application.Persistence.Interface.IEntity;
 using Persistence.Repo.EntityService;
+using System.Security.Claims;
+using System.IdentityModel.Tokens.Jwt;
+using Microsoft.AspNetCore.Http;
 namespace Persistence
 {
     public static class PersistenceDependencies
@@ -21,7 +24,6 @@ namespace Persistence
             services.AddScoped(typeof(IBaseRepo<>), typeof(BaseRepo<>));
             services.AddScoped(typeof(IUserService), typeof(UserService));
             services.AddScoped<IUnitOfWork, UnitOfWork>();
-
             services.Configure<JwtSettings>(configuration.GetSection("JwtSettings"));
             services.AddAuthentication(options =>
             {
@@ -34,13 +36,29 @@ namespace Persistence
                  o.SaveToken = true;
                  o.TokenValidationParameters = new TokenValidationParameters
                  {
-                     ValidateIssuerSigningKey = true,
-                     ValidateIssuer = true,
-                     ValidateAudience = true,
                      ValidateLifetime = true,
+                     RequireExpirationTime = true,
+                     ValidateIssuer = true,
                      ValidIssuer = configuration["JwtSettings:Issuer"],
+                     ValidateAudience = true,
                      ValidAudience = configuration["JwtSettings:Audience"],
-                     IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(configuration["JwtSettings:Key"]))
+                     ValidateIssuerSigningKey = true,
+                     IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(new JwtSettings().Key)),
+                     TokenDecryptionKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(new JwtSettings().EncryptionKey)),
+                 };
+                 o.Events = new JwtBearerEvents
+                 {
+                     OnMessageReceived = async (context) =>
+                     {
+                         await Task.CompletedTask;
+                     },
+                     OnTokenValidated = async (context) =>
+                     {
+                         var _claims = context.Principal.Claims;
+                         Guid userGuid = Guid.Parse(_claims.Where(x => x.Type == "guid").FirstOrDefault().Value);
+                        //context.Fail(userGuid.ToString());
+                         //await Task.CompletedTask;
+                     }
                  };
              });
             return services;

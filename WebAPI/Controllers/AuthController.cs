@@ -3,6 +3,7 @@ using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Domain.AppMetaData;
 using WebAPI.Base;
+using Microsoft.AspNetCore.Authorization;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -34,6 +35,14 @@ namespace WebAPI.Controllers
             };
             var response = await Mediator.Send(command);
             return CustomResult(response);
+        }
+
+        [Authorize]
+        [HttpGet]
+        [Route("[controller]/[action]")]
+        public IActionResult GetValue(string someThings)
+        {
+            return Ok(StatusCodes.Status200OK);
         }
     }
 }
