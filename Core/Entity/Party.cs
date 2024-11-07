@@ -44,6 +44,10 @@
 
         public string? CompanyCode { get; set; }
 
+        public string? CompanyIdentity { get; set; }
+
+        public string? CompanyName { get; set; }
+
         public string? Abbreviation { get; set; }
 
         public string? EconomicCode { get; set; }
@@ -53,8 +57,6 @@
         public string? ActivityType { get; set; }
 
         public string? Website { get; set; }
-
-        public string? CompanyName { get; set; }
 
         public int Type { get; set; }
 

@@ -1,0 +1,101 @@
+﻿<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <title>@ViewData["Title"]</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="@ViewData["Title"]">
+    <meta name="keywords" content="@ViewData["Title"]">
+    <link rel="shortcut icon" href="~/favicon.png">
+
+    <link href="~/landrik/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link href="~/landrik/css/materialdesignicons.min.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="~/landrik/unicons.iconscout.com/release/v3.0.6/css/line.css">
+    <link rel="stylesheet" href="~/landrik/css/tiny-slider.css" />
+    <link href="~/landrik/css/style.min.css" rel="stylesheet" type="text/css" id="theme-opt" />
+    <link href="~/landrik/css/colors/default.css" rel="stylesheet" id="color-opt">
+</head>
+<body>
+    <!-- Navbar STart -->
+    <header id="topnav" class="defaultscroll sticky">
+        <div class="container">
+            <!-- Logo container-->
+            <div>
+                <a class="logo" href="index.html">
+                    <img src="~/images/logo/logo-fa.png" class="l-dark" height="48" alt="">
+                    <img src="~/images/logo/logo-fa.png" class="l-light bg-white rounded" height="48" alt="">
+                </a>
+            </div>
+            <div class="buy-button">
+                <a href="/Auth/Login" target="_blank">
+                    <div class="btn btn-primary login-btn-primary">ورود </div>
+                    <div class="btn btn-light login-btn-light">ورود </div>
+                </a>
+            </div><!--end login button-->
+            <!-- End Logo container-->
+        </div><!--end container-->
+    </header><!--end header-->
+    <!-- Navbar End -->
+    @RenderBody()
+
+    <!-- Footer Start -->
+    <footer class="footer p-3">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 col-12 b-0 mb-md-2 pb-0 pb-md-1">
+                    <a href="#" class="logo-footer">
+                        <img src="~/images/logo/logo-fa.png" height="64" class="bg-white rounded" alt="">
+                    </a>
+                    <p class="mt-4">شركت كامپیوتری علم و صنعت در سال 1371 با هدف فعالیت در زمینه طراحی و تولید سیستم های كنترلی شامل سخت افزار و نرم افزارهای مربوطه تاسیس گردیده است.</p>
+                    <ul class="list-unstyled social-icon foot-social-icon mb-0 mt-4">
+                        <li class="list-inline-item"><a href="https://www.instagram.com/elmosanat_co/" target="_brank" class="rounded"><i data-feather="instagram" class="fea icon-sm fea-social"></i></a></li>
+                        <li class="list-inline-item"><a href="https://www.linkedin.com/company/elmosanat-co/mycompany/?viewAsMember=true" target="_blank" class="rounded"><i data-feather="linkedin" class="fea icon-sm fea-social"></i></a></li>
+                    </ul><!--end icon-->
+                </div><!--end col-->
+
+                <div class="col-lg-2 col-md-4 col-12 b-0 mb-md-2 pb-0 pb-md-1">
+                    <h5 class="text-light footer-head">شرکت </h5>
+                    <ul class="list-unstyled footer-list mt-4">
+                        <li><a href="https://www.elmosanat.com/درباره-ما/" class="text-foot"><i class="uil uil-angle-left-b me-1"></i> درباره ما </a></li>
+                        <li><a href="https://www.elmosanat.com/تماس-با-ما/" class="text-foot"><i class="uil uil-angle-left-b me-1"></i> تماس با ما </a></li>
+                        <li><a href="https://www.elmosanat.com/shop/" class="text-foot"><i class="uil uil-angle-left-b me-1"></i> محصولات </a></li>
+                    </ul>
+                </div><!--end col-->
+
+                <div class="col-lg-6 col-md-8 col-12 b-0 mb-md-2 pb-0 pb-md-1">
+                    <h5 class="text-light footer-head">اطلاعات تماس </h5>
+                    <p class="mt-1"><span class="text-primary fw-bold">آدرس: </span> تهران، خیابان فاطمی، خیابان پروین اعتصامی، پلاک 3</p>
+                    <p class="mt-1"><span class="text-primary fw-bold">تلفن: </span> 84336 - 021</p>
+                    <p class="mt-1"><span class="text-primary fw-bold">پست الکترونیکی: </span> info[at]elmosanat[.]com</p>
+                </div><!--end col-->
+            </div><!--end row-->
+        </div><!--end container-->
+    </footer><!--end footer-->
+    <footer class="footer footer-bar p-1">
+        <div class="container text-center">
+            <div class="row align-items-center">
+                <div class="col-sm-6">
+                    <div class="text-sm-start">
+                        <p class="mb-0">© <script>document.write(new Date().getFullYear())</script> تمام حقوق این سایت متعلق به شرکت علم و صنعت است. طراحی شده  <i class="mdi mdi-heart text-danger"></i> توسط  <a href="https://www.linkedin.com/in/mansour-nadiri" target="_blank" class="text-reset">منصور ندیری </a>.</p>
+                    </div>
+                </div><!--end col-->
+            </div><!--end row-->
+        </div><!--end container-->
+    </footer><!--end footer-->
+    <!-- Footer End -->
+    <!-- Back to top -->
+    <a href="#" onclick="topFunction()" id="back-to-top" class="btn btn-icon btn-primary back-to-top"><i data-feather="arrow-up" class="icons"></i></a>
+    <!-- Back to top -->
+    <script src="~/landrik/js/bootstrap.bundle.min.js"></script>
+    <script src="~/landrik/js/tiny-slider.js"></script>
+    <script src="~/landrik/js/feather.min.js"></script>
+    <script src="~/landrik/js/switcher.js"></script>
+    <script src="~/landrik/js/plugins.init.js"></script>
+    <script src="~/landrik/js/app.js"></script>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    @if (IsSectionDefined("Scripts"))
+    {
+        @await RenderSectionAsync("Scripts", required: false)
+    }
+</body>
+</html>

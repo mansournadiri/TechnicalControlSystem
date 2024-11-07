@@ -6,10 +6,10 @@ namespace Application.Feature.Auth.Request.Command
 {
     public class RegisterViewModel : IRequest<BaseResponse<RegisterResponse>>
     {
-        public string? firstName { get; set; }
-        public string? lastName { get; set; }
+        public long? partyRef { get; set; }
+        public string? companyName { get; set; }
+        public string? companyIdentity { get; set; }
         public string? mobileNumber { get; set; }
-        public string? email { get; set; }
-        public string? password { get; set; }
+        public string? nationalID { get; set; }
     }
 }

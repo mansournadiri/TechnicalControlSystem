@@ -27,11 +27,10 @@ namespace WebAPI.Controllers
         {
             RegisterViewModel command = new RegisterViewModel()
             {
-                email = request.email,
-                firstName = request.firstName,
-                lastName = request.lastName,
-                mobileNumber = request.mobileNumber,
-                password = request.password
+                companyIdentity = request.companyIdentity,
+                companyName = request.companyName,
+                nationalID = request.nationalID,
+                mobileNumber = request.mobileNumber
             };
             var response = await Mediator.Send(command);
             return CustomResult(response);

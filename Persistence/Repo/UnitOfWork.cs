@@ -1,4 +1,5 @@
 ﻿using Application.Persistence.Interface;
+using Application.Persistence.Interface.IEntity;
 using Persistence.Context;
 
 namespace Persistence.Repo
@@ -7,7 +8,9 @@ namespace Persistence.Repo
     {
         protected readonly ApplicationDBContext _context;
         private bool _disposed = false;
-        public UnitOfWork(ApplicationDBContext context)
+        public UnitOfWork(
+            ApplicationDBContext context
+            )
         {
             _context = context;
         }

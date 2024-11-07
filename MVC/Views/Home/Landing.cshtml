@@ -1,0 +1,333 @@
+﻿@{
+    ViewData["Title"] = "Landing";
+    Layout = "~/Views/Shared/_LayoutBase.cshtml";
+}
+<!-- Hero Start -->
+<section class="bg-half-170 d-table w-100" style="background: url('images/bg/truck-checking.jpg') center center;">
+    <div class="bg-overlay"></div>
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-7 col-md-6">
+                <div class="title-heading mt-4">
+                    <h1 class="display-4 fw-bold text-white title-dark mb-3">مجوز تردد ناوگان خود <br> را به راحتی بدست بیارید</h1>
+                    <p class="para-desc text-white-50">با ثبت درخواست الکترونیکی بازدید فنی ناوگان باری و مسافری، مجوز تردد را دریافت کنید.</p>
+                    <div class="mt-4">
+                        <a href="#step-by-step" class="btn btn-icon btn-pills btn-lg btn-light"><i data-feather="arrow-down" class="icons"></i></a>
+                    </div>
+                </div>
+            </div><!--end col-->
+
+            <div class="col-lg-5 col-md-6 mt-4 pt-2 mt-sm-0 pt-sm-0">
+                <div class="card shadow rounded border-0 ms-lg-5">
+                    <div class="card-body">
+                        <h5 class="card-title">همین الان ثبت نام کنید.</h5>
+                        <form id="login-form" class="login-form" method="post">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="mb-3">
+                                        <label class="form-label">نام شرکت </label>
+                                        <div class="form-icon position-relative">
+                                            <i data-feather="user-check" class="fea icon-sm icons"></i>
+                                            <input type="text" class="form-control ps-5" placeholder="نام شرکت" name="companyName" required="">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="mb-3">
+                                        <label class="form-label"> شناسه ملی شرکت: </label>
+                                        <input type="text" class="form-control" name="companyIdentity" placeholder="شناسه ملی" required="" >
+                                    </div>
+                                </div><!--end col-->
+                                <div class="col-md-6">
+                                    <label class="form-label"> تلفن تماس نماینده  </label>
+                                    <input type="text" class="form-control" name="mobileNumber" placeholder="تلفن تماس" required="">
+                                </div><!--end col-->
+                                <div class="col-md-12">
+                                    <div class="mb-3">
+                                        <label class="form-label"> کدملی نماینده </label>
+                                        <input type="email" class="form-control" placeholder="ایمیل" name="email" required="">
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="mb-3">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" value="" id="lawCheckBox" name="lawCheckBox">
+                                            <label class="form-check-label" for="lawCheckBox">تایید میکنم <a href="#" class="text-primary">قوانین و مقررات را مطالعه و تیکت را فعال میکنم</a></label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="d-grid">
+                                        <button type="submit" class="btn btn-primary">اکنون ثبت نام کنید</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div><!--end col-->
+        </div><!--end row-->
+    </div> <!--end container-->
+</section><!--end section-->
+<div class="position-relative">
+    <div class="shape overflow-hidden text-white">
+        <svg viewBox="0 0 2880 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M0 48H1437.5H2880V0H2160C1442.5 52 720 0 720 0H0V48Z" fill="currentColor"></path>
+        </svg>
+    </div>
+</div>
+<!-- Hero End -->
+
+<section id="step-by-step" class="section">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-12 text-center">
+                <div class="section-title mb-4 pb-2">
+                    <h4 class="title mb-4">برا دریافت مجوز</h4>
+                    <p class="text-muted para-desc mb-0 mx-auto">مراحل زیر را دنبال کنید <span class="text-primary fw-bold">به راحتی می‌توانید با ثبت نام و تکمیل اطلاعات شرکت خود و مدیران فنی طرف قرارداد نسبت به دریافت الکترونیکی مجوز تردد اقدام نمایید.</span></></p>
+                </div>
+            </div><!--end col-->
+        </div><!--end row-->
+
+        <div class="row">
+            <div class="col-lg-3 col-md-4 mt-4 pt-2">
+                <div class="card features fea-primary rounded p-4 bg-light text-center position-relative overflow-hidden border-0">
+                    <span class="h1 icon2 text-primary">
+                        <i class="uil uil-shield-check"></i>
+                    </span>
+                    <div class="card-body p-0 content">
+                        <h5>ثبت نام </h5>
+                        <p class="para text-muted mb-0">این یک واقعیت ثابت شده طولانی است که یک خواننده.</p>
+                    </div>
+                    <span class="big-icon text-center">
+                        <i class="uil uil-shield-check"></i>
+                    </span>
+                </div>
+            </div><!--end col-->
+
+            <div class="col-lg-3 col-md-4 mt-4 pt-2">
+                <div class="card features fea-primary rounded p-4 bg-light text-center position-relative overflow-hidden border-0">
+                    <span class="h1 icon2 text-primary">
+                        <i class="uil uil-thumbs-up"></i>
+                    </span>
+                    <div class="card-body p-0 content">
+                        <h5>تکمیل اسناد </h5>
+                        <p class="para text-muted mb-0">این یک واقعیت ثابت شده طولانی است که یک خواننده.</p>
+                    </div>
+                    <span class="big-icon text-center">
+                        <i class="uil uil-thumbs-up"></i>
+                    </span>
+                </div>
+            </div><!--end col-->
+
+            <div class="col-lg-3 col-md-4 mt-4 pt-2">
+                <div class="card features fea-primary rounded p-4 bg-light text-center position-relative overflow-hidden border-0">
+                    <span class="h1 icon2 text-primary">
+                        <i class="uil uil-keyboard-show"></i>
+                    </span>
+                    <div class="card-body p-0 content">
+                        <h5>تایید قوانین </h5>
+                        <p class="para text-muted mb-0">این یک واقعیت ثابت شده طولانی است که یک خواننده.</p>
+                    </div>
+                    <span class="big-icon text-center">
+                        <i class="uil uil-keyboard-show"></i>
+                    </span>
+                </div>
+            </div><!--end col-->
+
+            <div class="col-lg-3 col-md-4 mt-4 pt-2">
+                <div class="card features fea-primary rounded p-4 bg-light text-center position-relative overflow-hidden border-0">
+                    <span class="h1 icon2 text-primary">
+                        <i class="uil uil-award"></i>
+                    </span>
+                    <div class="card-body p-0 content">
+                        <h5>ثبت مدیران فنی</h5>
+                        <p class="para text-muted mb-0">این یک واقعیت ثابت شده طولانی است که یک خواننده.</p>
+                    </div>
+                    <span class="big-icon text-center">
+                        <i class="uil uil-award"></i>
+                    </span>
+                </div>
+            </div><!--end col-->
+
+            <div class="col-lg-3 col-md-4 mt-4 pt-2">
+                <div class="card features fea-primary rounded p-4 bg-light text-center position-relative overflow-hidden border-0">
+                    <span class="h1 icon2 text-primary">
+                        <i class="uil uil-bookmark"></i>
+                    </span>
+                    <div class="card-body p-0 content">
+                        <h5>ثبت ناوگان ملکی</h5>
+                        <p class="para text-muted mb-0">این یک واقعیت ثابت شده طولانی است که یک خواننده.</p>
+                    </div>
+                    <span class="big-icon text-center">
+                        <i class="uil uil-bookmark"></i>
+                    </span>
+                </div>
+            </div><!--end col-->
+
+            <div class="col-lg-3 col-md-4 mt-4 pt-2">
+                <div class="card features fea-primary rounded p-4 bg-light text-center position-relative overflow-hidden border-0">
+                    <span class="h1 icon2 text-primary">
+                        <i class="uil uil-favorite"></i>
+                    </span>
+                    <div class="card-body p-0 content">
+                        <h5>ثبت درخواست بازدید فنی</h5>
+                        <p class="para text-muted mb-0">این یک واقعیت ثابت شده طولانی است که یک خواننده.</p>
+                    </div>
+                    <span class="big-icon text-center">
+                        <i class="uil uil-favorite"></i>
+                    </span>
+                </div>
+            </div><!--end col-->
+
+            <div class="col-lg-3 col-md-4 mt-4 pt-2">
+                <div class="card features fea-primary rounded p-4 bg-light text-center position-relative overflow-hidden border-0">
+                    <span class="h1 icon2 text-primary">
+                        <i class="uil uil-clock"></i>
+                    </span>
+                    <div class="card-body p-0 content">
+                        <h5>تایید بازدید فنی</h5>
+                        <p class="para text-muted mb-0">این یک واقعیت ثابت شده طولانی است که یک خواننده.</p>
+                    </div>
+                    <span class="big-icon text-center">
+                        <i class="uil uil-clock"></i>
+                    </span>
+                </div>
+            </div><!--end col-->
+
+            <div class="col-lg-3 col-md-4 mt-4 pt-2">
+                <div class="card features fea-primary rounded p-4 bg-light text-center position-relative overflow-hidden border-0">
+                    <span class="h1 icon2 text-primary">
+                        <i class="uil uil-process"></i>
+                    </span>
+                    <div class="card-body p-0 content">
+                        <h5>دریافت مجوز</h5>
+                        <p class="para text-muted mb-0">این یک واقعیت ثابت شده طولانی است که یک خواننده.</p>
+                    </div>
+                    <span class="big-icon text-center">
+                        <i class="uil uil-process"></i>
+                    </span>
+                </div>
+            </div><!--end col-->
+        </div><!--end row-->
+    </div><!--end container-->
+
+    <div class="container mt-100 mt-60">
+        <div class="row align-items-end mb-4 pb-2">
+            <div class="col-md-8">
+                <div class="section-title text-center text-md-start">
+                    <h6 class="text-primary">بیشتر بدانید</h6>
+                    <h4 class="title mb-4">مقصد محبوب</h4>
+                    <p class="text-muted mb-0 para-desc">شروع به کار با <span class="text-primary fw-bold">لنـدریـک </span> که می تواند هر آنچه را که شما برای ایجاد آگاهی ، ایجاد ترافیک ، اتصال به آن نیاز دارید فراهم کند.</p>
+                </div>
+            </div><!--end col-->
+
+            <div class="col-md-4 mt-4 mt-sm-0">
+                <div class="text-center text-md-end">
+                    <a href="javascript:void(0)" class="text-primary h6">نمایش بیشتر <i data-feather="arrow-left" class="fea icon-sm"></i></a>
+                </div>
+            </div><!--end col-->
+        </div><!--end row-->
+    </div><!--end container-->
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12 mt-4 pt-2">
+                <div class="tiny-six-item">
+                    <div class="tiny-slide">
+                        <div class="popular-tour rounded-md position-relative overflow-hidden mx-2">
+                            <img src="~/landrik/images/travel/dubai.jpg" class="img-fluid" alt="">
+                            <div class="overlay-work bg-dark"></div>
+                            <div class="content">
+                                <a href="javascript:void(0)" class="title text-white h4 title-dark">دبی </a>
+                            </div>
+                        </div><!--end tour post-->
+                    </div>
+
+                    <div class="tiny-slide">
+                        <div class="popular-tour rounded-md position-relative overflow-hidden mx-2">
+                            <img src="~/landrik/images/travel/thailand.jpg" class="img-fluid" alt="">
+                            <div class="overlay-work bg-dark"></div>
+                            <div class="content">
+                                <a href="javascript:void(0)" class="title text-white h4 title-dark">تایلند </a>
+                            </div>
+                        </div><!--end tour post-->
+                    </div>
+
+                    <div class="tiny-slide">
+                        <div class="popular-tour rounded-md position-relative overflow-hidden mx-2">
+                            <img src="~/landrik/images/travel/india.jpg" class="img-fluid" alt="">
+                            <div class="overlay-work bg-dark"></div>
+                            <div class="content">
+                                <a href="javascript:void(0)" class="title text-white h4 title-dark">هند </a>
+                            </div>
+                        </div><!--end tour post-->
+                    </div>
+
+                    <div class="tiny-slide">
+                        <div class="popular-tour rounded-md position-relative overflow-hidden mx-2">
+                            <img src="~/landrik/images/travel/london.jpg" class="img-fluid" alt="">
+                            <div class="overlay-work bg-dark"></div>
+                            <div class="content">
+                                <a href="javascript:void(0)" class="title text-white h4 title-dark">لندن </a>
+                            </div>
+                        </div><!--end tour post-->
+                    </div>
+
+                    <div class="tiny-slide">
+                        <div class="popular-tour rounded-md position-relative overflow-hidden mx-2">
+                            <img src="~/landrik/images/travel/paris.jpg" class="img-fluid" alt="">
+                            <div class="overlay-work bg-dark"></div>
+                            <div class="content">
+                                <a href="javascript:void(0)" class="title text-white h4 title-dark">پاریس </a>
+                            </div>
+                        </div><!--end tour post-->
+                    </div>
+
+                    <div class="tiny-slide">
+                        <div class="popular-tour rounded-md position-relative overflow-hidden mx-2">
+                            <img src="~/landrik/images/travel/singapore.jpg" class="img-fluid" alt="">
+                            <div class="overlay-work bg-dark"></div>
+                            <div class="content">
+                                <a href="javascript:void(0)" class="title text-white h4 title-dark">سنگاپور </a>
+                            </div>
+                        </div><!--end tour post-->
+                    </div>
+
+                    <div class="tiny-slide">
+                        <div class="popular-tour rounded-md position-relative overflow-hidden mx-2">
+                            <img src="~/landrik/images/travel/dubai.jpg" class="img-fluid" alt="">
+                            <div class="overlay-work bg-dark"></div>
+                            <div class="content">
+                                <a href="javascript:void(0)" class="title text-white h4 title-dark">دبی </a>
+                            </div>
+                        </div><!--end tour post-->
+                    </div>
+                </div>
+            </div><!--end col-->
+        </div><!--end row-->
+    </div>
+</section><!--end section-->
+@section Scripts {
+    <script type="text/javascript">
+        $("#login-form").on("submit", function(e)
+        {
+            e.preventDefault();
+            var values = {};
+            $.each($(this).serializeArray(), function(i, field) {
+                values[field.name] = field.value;
+            });
+            $.ajax({
+                type: "POST",
+                url: "/Auth/Register",
+                data: JSON.stringify(values),
+                contentType: "application/json"
+            })
+            .done(function(data, textStatus, jqXHR){
+                console.log("Ajax completed: " + data);
+            })
+            .fail(function(jqXHR, textStatus, errorThrown){
+                console.log("Ajax problem: " + textStatus + ". " + errorThrown);
+            });
+        });
+    </script>
+}

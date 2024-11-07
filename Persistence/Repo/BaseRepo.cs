@@ -20,6 +20,12 @@ namespace Persistence.Repo
             int? Key = _dbSet.Max(Key_Predicate);
             return Key + 1 ?? 1;
         }
+        public long MaxKey(Expression<Func<T, long>> Key_Predicate)
+        {
+            if (_dbSet.IsNullOrEmpty()) return 1;
+            long? Key = _dbSet.Max(Key_Predicate);
+            return Key + 1 ?? 1;
+        }
         public T GetById(int id) => _dbSet.Find(id);
         public async Task<T> GetByIdAsync(int id)
         {

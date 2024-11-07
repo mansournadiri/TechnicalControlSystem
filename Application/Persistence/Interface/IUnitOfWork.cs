@@ -1,4 +1,6 @@
-﻿namespace Application.Persistence.Interface
+﻿using Application.Persistence.Interface.IEntity;
+
+namespace Application.Persistence.Interface
 {
     public interface IUnitOfWork : IDisposable
     {

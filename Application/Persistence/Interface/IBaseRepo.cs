@@ -5,6 +5,7 @@ namespace Application.Persistence.Interface
     public interface IBaseRepo<T> where T : class
     {
         int MaxKey(Expression<Func<T, int>> Key_Predicate);
+        long MaxKey(Expression<Func<T, long>> Key_Predicate);
         T GetById(int id);
         Task<T> GetByIdAsync(int id);
         IEnumerable<T> GetAll();

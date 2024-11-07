@@ -4,6 +4,7 @@ using Application.Feature.Auth.Result;
 using Application.Persistence.Interface;
 using Application.Persistence.Interface.IEntity;
 using AutoMapper;
+using Domain.Entity;
 using MediatR;
 
 namespace Application.Feature.Auth.Handler.Command
@@ -17,11 +18,13 @@ namespace Application.Feature.Auth.Handler.Command
         protected IUnitOfWork _uofw;
         protected IMapper _mapper;
         protected IUserService _userService;
-        public AuthHandler(IUnitOfWork uofw, IMapper mapper, IUserService userService)
+        protected IBaseRepo<Party> _partyService;
+        public AuthHandler(IUnitOfWork uofw, IMapper mapper, IUserService userService, IBaseRepo<Party> partyService)
         {
             _uofw = uofw;
             _mapper = mapper;
             _userService = userService;
+            _partyService = partyService;
         }
         public Task<BaseResponse<LoginResponse>> Handle(LoginViewModel command, CancellationToken cancellationToken)
         {
@@ -29,6 +32,24 @@ namespace Application.Feature.Auth.Handler.Command
         }
         public Task<BaseResponse<RegisterResponse>> Handle(RegisterViewModel command, CancellationToken cancellationToken)
         {
+            var exist = _partyService.isExist(x => x.CompanyIdentity == command.companyIdentity);
+            if (!exist)
+            {
+                Party _party = new Party();
+                _party.PartyId = _partyService.MaxKey(x => x.PartyId);
+                _party.CompanyIdentity = command.companyIdentity;
+                _party.CompanyName = command.companyName;
+                _party.Mobile = command.mobileNumber;
+                _party.NationalId = command.nationalID;
+                _party = _partyService.Add(_party);
+                _uofw.SaveChanges();
+                command.partyRef = _party.PartyId;
+            }
+            else
+            {
+                var selectParty = _partyService.Find(x => x.CompanyIdentity == command.companyIdentity);
+                command.partyRef = selectParty.PartyId;
+            }
             return _userService.Regiter(command);
         }
         public Task<string> Handle(ResetPasswordViewModel command, CancellationToken cancellationToken)

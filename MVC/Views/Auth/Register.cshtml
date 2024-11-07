@@ -1,0 +1,90 @@
+﻿@{
+    Layout = "~/Views/Shared/_LayoutLogin.cshtml";
+}
+
+<div class="modal-page shadow">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <p class="text-center m-t-30 m-b-40">
+                    <i class="icon-user-following border img-circle font-xxxlg p-20"></i>
+                </p>
+                <h2 class="text-center m-b-20">ثبت نام </h2>
+                <hr>
+
+                <form id="advanced-form" method="post" action="#">
+                    <div class="form-group">
+                        <label class="sr-only control-label" for="firstname"> نام شرکت </label>
+                        <div class="input-group round">
+                            <span class="input-group-addon">
+                                <i class="icon-note"></i>
+                            </span>
+                            <input type="text" class="form-control round" id="firstname" name="firstname" placeholder="نام شرکت">
+                        </div><!-- /.input-group-->
+                    </div><!-- /.form-group -->
+                    <div class="form-group">
+                        <label class="sr-only control-label" for="lastname">شناسه ملی</label>
+                        <div class="input-group round">
+                            <span class="input-group-addon">
+                                <i class="icon-note"></i>
+                            </span>
+                            <input type="text" class="form-control round" id="lastname" name="lastname" placeholder="شناسه ملی">
+                        </div><!-- /.input-group-->
+                    </div><!-- /.form-group -->
+                    <div class="form-group">
+                        <label class="sr-only control-label" for="username">تلفن تماس نماینده</label>
+                        <div class="input-group round">
+                            <span class="input-group-addon">
+                                <i class="icon-user"></i>
+                            </span>
+                            <input type="text" class="form-control round" id="username" name="username" placeholder="تلفن تماس نماینده">
+                        </div><!-- /.input-group-->
+                    </div><!-- /.form-group -->
+                    <div class="form-group">
+                        <label class="sr-only control-label" for="email">کدملی</label>
+                        <div class="input-group round">
+                            <span class="input-group-addon">
+                                <i class="icon-envelope"></i>
+                            </span>
+                            <input type="text" class="form-control round ltr text-left" id="email" name="email" placeholder="کدملی">
+                        </div><!-- /.input-group-->
+                    </div><!-- /.form-group -->
+                    <div class="form-group">
+                        <div class="input-group round">
+                            <div class="checkbox">
+                                <label>
+                                    <input type="checkbox" id="agree" name="agree" value="agree">
+                                    <a href="#">قوانین و مقررات</a>
+                                    سایت را می پذیرم
+                                </label>
+                            </div><!-- /.checkbox -->
+                        </div><!-- /.input-group-->
+                    </div><!-- /.form-group -->
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-success btn-block" name="signup" value="Sign up">
+                            <i class="icon-check"></i>
+                            ثبت نام
+                        </button>
+                    </div><!-- /.form-group -->
+                </form>
+
+                <hr class="m-b-30">
+                <a asp-action="Forget" class="btn btn-default btn-block m-b-10">
+                    <i class="icon-refresh font-lg"></i>
+                    بازیابی رمز  عبور
+                </a>
+                <a asp-action="Login" class="btn btn-default btn-block">
+                    <i class="icon-user-follow font-lg"></i>
+                    ثبت نام کرده اید؟ وارد شوید!
+                </a>
+            </div><!-- /.col-md-12 -->
+        </div><!-- /.row -->
+    </div><!-- /.container-fluid -->
+</div>
+
+@section Scripts
+    {
+    <!-- BEGIN PAGE JAVASCRIPT -->
+    <script src="assets/js/pages/register.js"></script>
+    <!-- END PAGE JAVASCRIPT -->
+}

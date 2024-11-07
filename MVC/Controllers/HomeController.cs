@@ -6,28 +6,16 @@ namespace MVC.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
-
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController()
         {
-            _logger = logger;
         }
 
-        public IActionResult Login()
+        public IActionResult Landing()
         {
             ViewData["Title"] = "ورود";
             return View();
         }
-        public IActionResult Forget()
-        {
-            ViewData["Title"] = "فراموشی رمز عبور";
-            return View();
-        }
-        public IActionResult Register()
-        {
-            ViewData["Title"] = "ثبت نام";
-            return View();
-        }
+        
 
         public IActionResult Privacy()
         {
