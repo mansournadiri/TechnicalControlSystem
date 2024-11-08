@@ -10,9 +10,7 @@ using System.Text;
 using Application.Model;
 using Application.Persistence.Interface.IEntity;
 using Persistence.Repo.EntityService;
-using System.Security.Claims;
-using System.IdentityModel.Tokens.Jwt;
-using Microsoft.AspNetCore.Http;
+
 namespace Persistence
 {
     public static class PersistenceDependencies
@@ -23,6 +21,7 @@ namespace Persistence
             services.AddDbContext<ApplicationDBContext>(options => options.UseSqlServer(ConnectionString));
             services.AddScoped(typeof(IBaseRepo<>), typeof(BaseRepo<>));
             services.AddScoped(typeof(IUserService), typeof(UserService));
+            services.AddScoped<IPartyService, PartyService>();
             services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.Configure<JwtSettings>(configuration.GetSection("JwtSettings"));
             services.AddAuthentication(options =>
@@ -56,7 +55,7 @@ namespace Persistence
                      {
                          var _claims = context.Principal.Claims;
                          Guid userGuid = Guid.Parse(_claims.Where(x => x.Type == "guid").FirstOrDefault().Value);
-                        //context.Fail(userGuid.ToString());
+                         //context.Fail(userGuid.ToString());
                          //await Task.CompletedTask;
                      }
                  };

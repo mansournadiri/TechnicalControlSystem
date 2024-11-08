@@ -1,7 +1,6 @@
 ﻿using Application.Base;
 using Application.Feature.Auth.Request.Command;
 using Application.Feature.Auth.Result;
-using Domain.Entity;
 
 namespace Application.Persistence.Interface.IEntity
 {

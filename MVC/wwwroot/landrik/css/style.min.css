@@ -2432,6 +2432,9 @@ h6,
  line-height:1.5;
  font-weight:600
 }
+.swal2-content, .swal2-buttonswrapper button {
+    font-family: IRANSansfanum;
+}
 ::-moz-selection {
  background:rgba(47,85,212,0.9);
  color:#fff

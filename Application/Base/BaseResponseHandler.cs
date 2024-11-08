@@ -88,5 +88,15 @@ namespace Application.Base
                 Meta = meta
             };
         }
+
+        public BaseResponse<T> CheckValidation<T>(string message, bool Succeeded, HttpStatusCode httpStatusCode)
+        {
+            return new BaseResponse<T>()
+            {
+                StatusCode = httpStatusCode,
+                Succeeded = Succeeded,
+                Message = message,
+            };
+        }
     }
 }

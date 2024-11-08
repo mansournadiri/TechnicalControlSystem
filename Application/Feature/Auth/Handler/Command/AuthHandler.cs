@@ -1,6 +1,7 @@
 ﻿using Application.Base;
 using Application.Feature.Auth.Request.Command;
 using Application.Feature.Auth.Result;
+using Application.Feature.Auth.Validatior;
 using Application.Persistence.Interface;
 using Application.Persistence.Interface.IEntity;
 using AutoMapper;
@@ -9,7 +10,7 @@ using MediatR;
 
 namespace Application.Feature.Auth.Handler.Command
 {
-    public class AuthHandler : 
+    public class AuthHandler :
         IRequestHandler<LoginViewModel, BaseResponse<LoginResponse>>,
         IRequestHandler<RegisterViewModel, BaseResponse<RegisterResponse>>,
         IRequestHandler<ResetPasswordViewModel, string>,
@@ -18,39 +19,34 @@ namespace Application.Feature.Auth.Handler.Command
         protected IUnitOfWork _uofw;
         protected IMapper _mapper;
         protected IUserService _userService;
-        protected IBaseRepo<Party> _partyService;
-        public AuthHandler(IUnitOfWork uofw, IMapper mapper, IUserService userService, IBaseRepo<Party> partyService)
+        protected IPartyService _partyService;
+        protected BaseResponseHandler _baseResponseHandler;
+        public AuthHandler(IUnitOfWork uofw, IMapper mapper, IUserService userService, IPartyService partyService)
         {
             _uofw = uofw;
             _mapper = mapper;
             _userService = userService;
             _partyService = partyService;
+            _baseResponseHandler = new BaseResponseHandler();
         }
         public Task<BaseResponse<LoginResponse>> Handle(LoginViewModel command, CancellationToken cancellationToken)
         {
             return _userService.Login(command);
         }
-        public Task<BaseResponse<RegisterResponse>> Handle(RegisterViewModel command, CancellationToken cancellationToken)
+        public async Task<BaseResponse<RegisterResponse>> Handle(RegisterViewModel command, CancellationToken cancellationToken)
         {
-            var exist = _partyService.isExist(x => x.CompanyIdentity == command.companyIdentity);
-            if (!exist)
+            RegisterValidation validation = new RegisterValidation(command);
+            var response = await validation.CheckValidation(cancellationToken);
+            if (response.Succeeded == true)
             {
-                Party _party = new Party();
-                _party.PartyId = _partyService.MaxKey(x => x.PartyId);
-                _party.CompanyIdentity = command.companyIdentity;
-                _party.CompanyName = command.companyName;
-                _party.Mobile = command.mobileNumber;
-                _party.NationalId = command.nationalID;
-                _party = _partyService.Add(_party);
-                _uofw.SaveChanges();
-                command.partyRef = _party.PartyId;
+                long partyRef = await _partyService.Regiter(command);
+                if (partyRef > 0)
+                    return await _userService.Regiter(command);
+                else
+                    return new BaseResponse<RegisterResponse>() { Succeeded = false, Message = "خطا در ایجاد حساب کاربری، لطفاً مجدداً اقدام نمایید." };
             }
             else
-            {
-                var selectParty = _partyService.Find(x => x.CompanyIdentity == command.companyIdentity);
-                command.partyRef = selectParty.PartyId;
-            }
-            return _userService.Regiter(command);
+                return new BaseResponse<RegisterResponse>() { Succeeded = false, Message = response.Message };
         }
         public Task<string> Handle(ResetPasswordViewModel command, CancellationToken cancellationToken)
         {

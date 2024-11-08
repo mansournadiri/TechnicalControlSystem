@@ -15,7 +15,7 @@ namespace MVC.Controllers
             ViewData["Title"] = "ورود";
             return View();
         }
-        
+
 
         public IActionResult Privacy()
         {

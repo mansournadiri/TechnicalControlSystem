@@ -29,14 +29,7 @@ namespace MVC.Controllers
         [HttpPost]
         public async Task<IActionResult> Register(RegisterViewModel request, bool? baseResponse = false)
         {
-            RegisterViewModel command = new RegisterViewModel()
-            {
-                companyIdentity = request.companyIdentity,
-                companyName = request.companyName,
-                nationalID = request.nationalID,
-                mobileNumber = request.mobileNumber
-            };
-            var response = await _sender.Send(command);
+            var response = await _sender.Send(request);
             return Ok(response);
         }
     }

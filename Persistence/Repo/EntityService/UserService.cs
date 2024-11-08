@@ -17,15 +17,14 @@ namespace Persistence.Repo.EntityService
 {
     public class UserService : IUserService
     {
-        //private readonly JwtSettings _jwtSettings;
         private readonly BaseResponseHandler _baseResponseHandler;
         private readonly IBaseRepo<User> _baseRepo;
         private readonly IUnitOfWork _unitOfWork;
         private readonly ICommon _common;
         private readonly JwtSettings _jwtSettings;
         public UserService(
-            IBaseRepo<User> baseRepo, 
-            IUnitOfWork unitOfWork, 
+            IBaseRepo<User> baseRepo,
+            IUnitOfWork unitOfWork,
             ICommon common,
             IOptions<JwtSettings> jwtSettings)
         {
@@ -48,13 +47,14 @@ namespace Persistence.Repo.EntityService
             {
                 return _baseResponseHandler.NotFound<LoginResponse>("InvalidCredentials");
             }
-            SecurityTokenDescriptor jwtSecurityTokenDescriptor = await GenerateToken(user);
+            SecurityTokenDescriptor jwtSecurityTokenDescriptor = await GenerateToken(
+                new JWTClaims { guid = user.guid, userName = user.UserName, partyRef = user.PartyRef, role = "User" });
             JwtSecurityTokenHandler tokenHandler = new();
             var securityToken = tokenHandler.CreateToken(jwtSecurityTokenDescriptor);
             LoginResponse response = new LoginResponse
             {
                 UserId = user.UserId,
-                Token = new JwtSecurityTokenHandler().WriteToken(securityToken),
+                Token = tokenHandler.WriteToken(securityToken),
                 Email = user.UserName,
                 UserName = user.UserName,
                 guid = user.guid
@@ -67,19 +67,31 @@ namespace Persistence.Repo.EntityService
             var exist = await _baseRepo.IsExistAsync(x => x.UserName == request.nationalID);
             if (exist)
             {
-                return _baseResponseHandler.Conflict<RegisterResponse>("UserDuplicated");
+                return _baseResponseHandler.Conflict<RegisterResponse>("کاربر قبلاً در سیستم تعریف شده است.");
             }
             User _user = new User();
             _user.UserId = _baseRepo.MaxKey(x => x.UserId);
             _user.UserName = request.nationalID;
-            _user.PartyRef = request.partyRef.Value;
+            //_user.PartyRef = request.partyRef.Value;
             var user = await _baseRepo.AddAsync(_user);
             var numberRowInserted = _unitOfWork.SaveChanges();
             if (numberRowInserted > 0)
             {
+                SecurityTokenDescriptor jwtSecurityTokenDescriptor =
+                    await GenerateToken(new JWTClaims
+                    {
+                        partyRef = user.PartyRef,
+                        role = "User",
+                        userName = user.UserName,
+                        guid = user.guid
+                    });
+
+                JwtSecurityTokenHandler tokenHandler = new();
+                var securityToken = tokenHandler.CreateToken(jwtSecurityTokenDescriptor);
                 RegisterResponse _registerResponse = new RegisterResponse();
                 _registerResponse.UserId = user.UserId;
                 _registerResponse.guid = user.guid;
+                _registerResponse.jwtToken = tokenHandler.WriteToken(securityToken);
                 return _baseResponseHandler.Success<RegisterResponse>(_registerResponse, null);
             }
             else
@@ -96,27 +108,20 @@ namespace Persistence.Repo.EntityService
             throw new NotImplementedException();
         }
 
-        private async Task<SecurityTokenDescriptor> GenerateToken(User user)
+        private async Task<SecurityTokenDescriptor> GenerateToken(JWTClaims _claims)
         {
             var claims = new[]
             {
-                new Claim(JwtRegisteredClaimNames.Email, value:user.UserName??string.Empty),
-                new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
-                new Claim(CustomClaimTypes.guid, user.guid.ToString())
+                new Claim(CustomClaimTypes.partyRef, _claims.partyRef.ToString()),
+                new Claim(CustomClaimTypes.userName, value:_claims.userName??string.Empty),
+                new Claim(CustomClaimTypes.guid, _claims.guid.ToString()),
+                new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())
             };
-
             var symmetricSecurityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_jwtSettings.Key));
             var signingCredentials = new SigningCredentials(symmetricSecurityKey, SecurityAlgorithms.HmacSha256);
             symmetricSecurityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_jwtSettings.EncryptionKey));
             var encryptionCredential = new EncryptingCredentials(symmetricSecurityKey, SecurityAlgorithms.Aes128KW, SecurityAlgorithms.Aes128CbcHmacSha256);
 
-            //var jwtSecurityToken = new JwtSecurityToken(
-            //    issuer: _jwtSettings.Issuer,
-            //    audience: _jwtSettings.Audience,
-            //    claims: claims,
-            //    expires: DateTime.UtcNow.AddMinutes(_jwtSettings.DurationInMinutes),
-            //    signingCredentials: signingCredentials
-            //    );
             var jwtSecurityTokenDescriptor = new SecurityTokenDescriptor()
             {
                 Subject = new ClaimsIdentity(claims),
