@@ -32,5 +32,10 @@ namespace MVC.Controllers
             var response = await _sender.Send(request);
             return Ok(response);
         }
+        [HttpGet]
+        public IActionResult ConfirmRegisteration()
+        {
+            return View();
+        }
     }
 }
