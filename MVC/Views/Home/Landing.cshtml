@@ -21,7 +21,7 @@
                 <div class="card shadow rounded border-0 ms-lg-5">
                     <div class="card-body">
                         <h5 class="card-title">همین الان ثبت نام کنید.</h5>
-                        <form id="login-form" class="login-form" method="post">
+                        <form id="login-form" class="login-form" method="post" action="/Auth/Register">
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="mb-3">
@@ -326,50 +326,24 @@
     <script type="text/javascript">
         $("#login-form").on("submit", function (e) 
         {
-            e.preventDefault();
-            $('.check-need').each(function (i, obj) {
+            $('.check-need').each(function (i, obj) 
+            {
                 checkItem($(obj));
             });
-            if ($('.is-invalid').length === 0) {
-                var formData = new FormData();
-                $.each($(this).serializeArray(), function (i, field) {
-                    formData.append(`${field.name}`, field.value);
-                });
-                console.log(formData);
-                $.ajax({
-                    type: "POST",
-                    data: formData,
-                    processData: false,
-                    contentType: false,
-                    url: "/Auth/Register",
-                    success: function (data) {
-                        console.log(data);
-                        if (data.succeeded)
-                        {
-                            swal(
-                                'انجام گردید.',
-                                data.message,
-                                'success');
-                        }
-                        else
-                        {
-                            swal(
-                                'ناموفق',
-                                data.message,
-                                'error');
-                        }
-                    },
-                    error: function () {
-                        swal(
-                            'ناموفق',
-                            'در اجرای دستورات خطایی رخ داده است.',
-                            'error');
-                    }
-                }).done(function (data, textStatus, jqXHR) {
-                    //console.log("Ajax completed: " + data);
-                }).fail(function (jqXHR, textStatus, errorThrown) {
-                    //console.log("Ajax problem: " + textStatus + ". " + errorThrown);
-                });
+            if ($('.is-invalid').length > 0) 
+            {
+                e.preventDefault();
+                swal(
+                    'ناموفق',
+                    'ابتدا فرم را تکمیل نمایید..',
+                    'error');
+            }
+            if ($("#lawCheckBox:checked").length === 0) {
+                e.preventDefault();
+                swal(
+                    'اخطار',
+                    "قوانین و مقررات را تایید نمایید.",
+                    'warning');
             }
         });
     </script>

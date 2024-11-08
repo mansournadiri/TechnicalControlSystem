@@ -9,6 +9,7 @@ namespace Persistence.Context
         : base(options)
         {
         }
+        public virtual DbSet<VerificationCode> VerificationCodes { get; set; }
 
         public virtual DbSet<Lookup> Lookups { get; set; }
 
@@ -19,8 +20,17 @@ namespace Persistence.Context
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<VerificationCode>(entity =>
+            {
+                entity.ToTable("VerificationCode", "SYS3");
+                entity.Property(e => e.verificationId).ValueGeneratedNever().HasColumnName("verificationId");
+                entity.HasKey(e => e.verificationId).HasName("PK_HSE_VerificationCode");
+
+            });
             modelBuilder.Entity<Lookup>(entity =>
             {
+                entity.HasKey(e => e.LookupId).HasName("PK_SYS_Lookup");
+
                 entity.ToTable("Lookup", "SYS3");
 
                 entity.Property(e => e.LookupId)
@@ -91,7 +101,7 @@ namespace Persistence.Context
 
             modelBuilder.Entity<User>(entity =>
             {
-                entity.HasKey(e => e.UserId).HasName("PK_Co_Users");
+                entity.HasKey(e => e.UserId).HasName("PK_BSE_User");
 
                 entity.ToTable("User", "BSE");
 
@@ -122,11 +132,8 @@ namespace Persistence.Context
                 entity.Property(e => e.RemoveDateTime)
                     .HasColumnType("datetime")
                     .HasColumnName("Remove_DateTime");
+                entity.HasQueryFilter(x => !x.IsDeleted);
             });
-
-
-
-            modelBuilder.Entity<User>().HasQueryFilter(x => !x.IsDeleted);
         }
     }
 }

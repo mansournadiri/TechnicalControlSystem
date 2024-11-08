@@ -10,6 +10,7 @@ using System.Text;
 using Application.Model;
 using Application.Persistence.Interface.IEntity;
 using Persistence.Repo.EntityService;
+using Microsoft.AspNetCore.Http;
 
 namespace Persistence
 {

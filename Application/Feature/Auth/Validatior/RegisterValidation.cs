@@ -21,21 +21,21 @@ namespace Application.Feature.Auth.Validatior
             await Task.Run(() =>
             {
                 if (!BaseValidation.ValidationValueNotNull(_request.companyName))
-                    message = "Company Name Can not be null";
+                    message = "نام شرکت نمی‌تواند خالی باشد.";
 
                 if (!BaseValidation.ValidationValueNotNull(_request.companyIdentity))
-                    message = "Company Identity Can not be null";
+                    message = "شناسه اقتصادی شرکت نمی‌تواند خالی باشد.";
                 if (!BaseValidation.ValidationNumber(_request.companyIdentity))
-                    message = "Company Identity id invalid";
+                    message = "شناسه اقتصادی شرکت نامعتبر است.";
 
                 if (!BaseValidation.ValidationNationalId(_request.nationalID))
-                    message = "National ID is invalid";
+                    message = "کدملی وارد شده معتبر نیست.";
 
                 if (!BaseValidation.ValidationMobileNumber(_request.mobileNumber))
-                    message = "Mobile Number is invalid";
+                    message = "شماره تماس وارد شده معتبر نیست.";
 
                 if (!BaseValidation.ValidationEmailAddress(_request.mailAddress))
-                    message = "Email Address is invalid";
+                    message = "پست الکترونیکی وارد شده معتبر نیست.";
             }, cancellationToken);
 
             if (string.IsNullOrEmpty(message))

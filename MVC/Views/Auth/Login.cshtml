@@ -1,59 +1,63 @@
 ﻿@{
+    ViewBag.Title = "ورود";
     Layout = "~/Views/Shared/_LayoutLogin.cshtml";
 }
-<div class="modal-page shadow">
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-md-12">
-                @* <div class="logo-con m-t-10 m-b-10">
-                    <img src="~/assets/images/logo-dark.png" class="dark-logo center-block img-responsive" alt="logo">
-                    <img src="~/assets/images/logo.png" class="light-logo center-block img-responsive" alt="logo">
-                </div> *@
-                <h2 class="text-center m-b-20">وارد شوید</h2>
-                <hr>
-                <form id="form" class="m-t-30 m-b-30" method="POST" role="form">
-                    <div class="form-group">
-                        <label for="email" class="sr-only">نام کاربری</label>
-                        <div class="input-group">
-                            <span class="input-group-addon">
-                                <i class="icon-envelope"></i>
-                            </span>
-                            <input id="email" class="form-control ltr text-left" type="email" name="email" required>
-                        </div><!-- /.input-group -->
-                    </div><!-- /.form-group -->
-                    <div class="form-group">
-                        <label for="password" class="sr-only">رمز عبور</label>
-                        <div class="input-group">
-                            <span class="input-group-addon">
-                                <i class="icon-key"></i>
-                            </span>
-                            <input id="password" class="form-control ltr text-left" type="password" minlength="5" required>
-                        </div><!-- /.input-group -->
-                    </div><!-- /.form-group -->
-                    <p>
-                        <button class="btn btn-success btn-block" type="submit">
-                            <i class="icon-login font-lg"></i>
-                            ورود
-                        </button>
-                    </p>
-                </form>
-                <hr class="m-b-30">
-                <a asp-action="Forget" class="btn btn-default btn-block m-b-10">
-                    <i class="icon-refresh font-lg"></i>
-                    بازیابی رمز  عبور
-                </a>
-                <a asp-action="َRegister" class="btn btn-default btn-block">
-                    <i class="icon-user-follow font-lg"></i>
-                    حساب ندارید، ثبت نام کنید!
-                </a>
-            </div><!-- /.col-md-12 -->
-        </div><!-- /.row -->
-    </div><!-- /.container-fluid -->
-</div><!-- /.modal-page -->
 
-@section Scripts
-{
-    <!-- BEGIN PAGE JAVASCRIPT -->
-    <script src="~/assets/js/pages/login.js"></script>
-    <!-- END PAGE JAVASCRIPT -->
-}
+<section class="bg-home bg-primary d-flex align-items-center">
+    <div class="bg-overlay bg-overlay-white"></div>
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-5 col-md-8">
+                <div class="card login-page bg-white shadow rounded border-0">
+                    <div class="card-body">
+                        <h4 class="card-title text-center">ورود </h4>
+                        <form class="login-form mt-4">
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="mb-3">
+                                        <label class="form-label">ایمیل شما <span class="text-danger">*</span></label>
+                                        <div class="form-icon position-relative">
+                                            <i data-feather="user" class="fea icon-sm icons"></i>
+                                            <input type="email" class="form-control ps-5" placeholder="ایمیل" name="email" required="">
+                                        </div>
+                                    </div>
+                                </div><!--end col-->
+
+                                <div class="col-lg-12">
+                                    <div class="mb-3">
+                                        <label class="form-label">رمز عبور  <span class="text-danger">*</span></label>
+                                        <div class="form-icon position-relative">
+                                            <i data-feather="key" class="fea icon-sm icons"></i>
+                                            <input type="password" class="form-control ps-5" placeholder="رمز عبور " required="">
+                                        </div>
+                                    </div>
+                                </div><!--end col-->
+
+                                <div class="col-lg-12">
+                                    <div class="d-flex justify-content-between">
+                                        <div class="mb-3">
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                                                <label class="form-check-label" for="flexCheckDefault">مرا به خاطر بسپار </label>
+                                            </div>
+                                        </div>
+                                        <p class="forgot-pass mb-0"><a href="/Auth/forget" class="text-dark fw-bold">فراموشی رمز عبور؟ </a></p>
+                                    </div>
+                                </div><!--end col-->
+
+                                <div class="col-lg-12 mb-0">
+                                    <div class="d-grid">
+                                        <button class="btn btn-primary">ورود  </button>
+                                    </div>
+                                </div><!--end col-->
+                                <div class="col-12 text-center">
+                                    <p class="mb-0 mt-3"><small class="text-dark me-2">حسابی ندارید؟ </small> <a href="/Auth/register" class="text-dark fw-bold">ثبت نام کنید </a></p>
+                                </div><!--end col-->
+                            </div><!--end row-->
+                        </form>
+                    </div>
+                </div><!---->
+            </div><!--end col-->
+        </div><!--end row-->
+    </div> <!--end container-->
+</section><!--end section-->

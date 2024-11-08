@@ -7,6 +7,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddApplicationDependencies();
 builder.Services.AddPersistenceDependencies(builder.Configuration);
 builder.Services.AddCommonDependencies();
+builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 builder.Services.AddControllersWithViews();
 
 var app = builder.Build();
@@ -25,5 +26,10 @@ app.UseAuthorization();
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Landing}/{id?}");
+
+app.MapControllerRoute(
+  name: "profile",
+  pattern: "{area=Profile}/{controller=Home}/{action=Dashboard}/{id?}"
+);
 
 app.Run();

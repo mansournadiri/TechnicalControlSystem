@@ -7,5 +7,6 @@
         public const string mailAddress = "email";
         public const string userName = "userName";
         public const string mobileNumber = "mobileNumber";
+        public const string XAccessToken = "X-Access-Token";
     }
 }

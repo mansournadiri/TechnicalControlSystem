@@ -1,52 +1,70 @@
 ﻿<!DOCTYPE html>
 <html lang="fa" dir="rtl">
 <head>
-    <title>@ViewData["Title"]</title>
+    <title>@ViewData["Title"] | علم و صنعت</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="@ViewData["Title"]">
     <meta name="keywords" content="@ViewData["Title"]">
-    <link rel="shortcut icon" href="~/assets/images/favicon.png">
+    <link rel="shortcut icon" href="~/favicon.png">
 
-    <!-- BEGIN CSS -->
-    <link href="~/assets/plugins/bootstrap/bootstrap5/css/bootstrap.rtl.min.css" rel="stylesheet">
-    <link href="~/assets/plugins/simple-line-icons/css/simple-line-icons.min.css" rel="stylesheet">
+    <link href="~/landrik/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link href="~/landrik/css/materialdesignicons.min.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="~/landrik/unicons.iconscout.com/release/v3.0.6/css/line.css">
+    <link rel="stylesheet" href="~/landrik/css/tiny-slider.css" />
+    <link href="~/landrik/css/style.min.css" rel="stylesheet" type="text/css" id="theme-opt" />
+    <link href="~/landrik/css/colors/default.css" rel="stylesheet" id="color-opt">
     <link href="~/assets/plugins/sweetalert2/dist/sweetalert2.min.css" rel="stylesheet">
-    <link href="~/assets/plugins/paper-ripple/dist/paper-ripple.min.css" rel="stylesheet">
-    <link href="~/assets/plugins/iCheck/skins/square/_all.css" rel="stylesheet">
-    <link href="~/assets/css/style.css" rel="stylesheet">
-    <link href="~/assets/css/colors.css" rel="stylesheet">
-    <!-- END CSS -->
-
-
+    <link href="~/css/site.css" rel="stylesheet" />
 </head>
-<body class="fix-header active-ripple theme-blue">
-    <!-- BEGIN LOEADING -->
-    <div id="loader">
-        <div class="spinner"></div>
-    </div><!-- /loader -->
-    <!-- END LOEADING -->
-    <!-- BEGIN WRAPPER -->
-    <div class="fixed-modal-bg"></div>
-    <a href="#" class="btn btn-info btn-icon btn-round btn-lg" id="toggle-dark-mode">
-        <i class="icon-bulb"></i>
-    </a>
-    <>
-        @RenderBody()
-    </>
-    <!-- END WRAPPER -->
-    <!-- BEGIN JS -->
-    <script src="~/assets/plugins/jquery/dist/jquery-3.6.1.min.js"></script>
-    <script src="~/assets/plugins/jquery-migrate/jquery-migrate-1.2.1.min.js"></script>
-    <script src="~/assets/plugins/bootstrap/bootstrap5/js/bootstrap.bundle.min.js"></script>
-    <script src="~/assets/plugins/paper-ripple/dist/PaperRipple.min.js"></script>
-    <script src="~/assets/plugins/sweetalert2//dist/sweetalert2.min.js"></script>
-    <script src="~/assets/plugins/iCheck/icheck.min.js"></script>
-    <script src="~/assets/plugins/jquery-validation/dist/jquery.validate.min.js"></script>
-    <script src="~/assets/plugins/jquery-validation/src/localization/messages_fa.js"></script>
-    <script src="~/assets/js/core.js"></script>
+
+<body>
+    <!-- Loader -->
+    <div id="preloader">
+        <div id="status">
+            <div class="spinner">
+                <div class="double-bounce1"></div>
+                <div class="double-bounce2"></div>
+            </div>
+        </div>
+    </div>
+    <div class="back-to-home rounded d-none d-sm-block">
+        <a href="/" class="btn btn-icon btn-primary"><i data-feather="home" class="icons"></i></a>
+    </div>
+    @if (ViewBag.response != null)
+    {
+
+        var _baseResponse = ViewBag.response;
+        if (_baseResponse.Succeeded == false)
+        {
+            <div class="alert-response">
+                <div class="alert alert-danger mb-0" role="alert">
+                    <h4 class="alert-heading">خطا! </h4>
+                    <p>@_baseResponse.Message</p>
+                    <!--<p class="mb-0 border-top pt-3">هر زمان که نیاز داشتید ، حتماً از سرویس های حاشیه ای برای خوب و مرتب کردن استفاده کنید.</p>-->
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="بستن"> </button>
+                </div>
+            </div>
+        }
+    }
+    <!-- Loader -->
+    @RenderBody()
+    <!-- end Style switcher -->
+    <!-- javascript -->
+    <script src="~/landrik/js/bootstrap.bundle.min.js"></script>
+    <!-- Icons -->
+    <script src="~/landrik/js/feather.min.js"></script>
+    <!-- Switcher -->
+    <script src="~/landrik/js/switcher.js"></script>
+    <!-- Main Js -->
+    <script src="~/landrik/js/plugins.init.js"></script><!--Note: All init js like tiny slider, counter, countdown, maintenance, lightbox, gallery, swiper slider, aos animation etc.-->
+    <script src="~/landrik/js/app.js"></script><!--Note: All important javascript like page loader, menu, sticky menu, menu-toggler, one page menu etc. -->
     @if (IsSectionDefined("Scripts"))
     {
+        <script src="~/lib/jquery/dist/jquery.min.js"></script>
+        <script src="~/lib/jquery/dist/jqueryBlockUI.js"></script>
+        <script src="~/assets/plugins/sweetalert2/dist/sweetalert2.min.js"></script>
+        <script src="~/js/site.js"></script>
         @await RenderSectionAsync("Scripts", required: false)
     }
 </body>

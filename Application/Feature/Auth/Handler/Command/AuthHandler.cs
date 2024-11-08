@@ -11,6 +11,7 @@ using MediatR;
 namespace Application.Feature.Auth.Handler.Command
 {
     public class AuthHandler :
+        IRequestHandler<ConfirmLoginViewModel, BaseResponse<LoginResponse>>,
         IRequestHandler<LoginViewModel, BaseResponse<LoginResponse>>,
         IRequestHandler<RegisterViewModel, BaseResponse<RegisterResponse>>,
         IRequestHandler<ResetPasswordViewModel, string>,
@@ -47,6 +48,16 @@ namespace Application.Feature.Auth.Handler.Command
             }
             else
                 return new BaseResponse<RegisterResponse>() { Succeeded = false, Message = response.Message };
+        }
+        public async Task<BaseResponse<LoginResponse>> Handle(ConfirmLoginViewModel command, CancellationToken cancellationToken)
+        {
+            BaseResponse<LoginResponse> response = new BaseResponse<LoginResponse>();
+            await Task.Run(() => 
+            {
+                response.Succeeded = false;
+                response.StatusCode = System.Net.HttpStatusCode.OK;
+            }, cancellationToken);
+            return response;
         }
         public Task<string> Handle(ResetPasswordViewModel command, CancellationToken cancellationToken)
         {
