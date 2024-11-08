@@ -11,5 +11,6 @@ namespace Application.Feature.Auth.Request.Command
         public string? companyIdentity { get; set; }
         public string? mobileNumber { get; set; }
         public string? nationalID { get; set; }
+        public string? mailAddress { get; set; }
     }
 }

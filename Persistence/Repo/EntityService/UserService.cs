@@ -17,7 +17,6 @@ namespace Persistence.Repo.EntityService
 {
     public class UserService : IUserService
     {
-        //private readonly JwtSettings _jwtSettings;
         private readonly BaseResponseHandler _baseResponseHandler;
         private readonly IBaseRepo<User> _baseRepo;
         private readonly IUnitOfWork _unitOfWork;
@@ -67,12 +66,12 @@ namespace Persistence.Repo.EntityService
             var exist = await _baseRepo.IsExistAsync(x => x.UserName == request.nationalID);
             if (exist)
             {
-                return _baseResponseHandler.Conflict<RegisterResponse>("UserDuplicated");
+                return _baseResponseHandler.Conflict<RegisterResponse>("کاربر قبلاً در سیستم تعریف شده است.");
             }
             User _user = new User();
             _user.UserId = _baseRepo.MaxKey(x => x.UserId);
             _user.UserName = request.nationalID;
-            _user.PartyRef = request.partyRef.Value;
+            //_user.PartyRef = request.partyRef.Value;
             var user = await _baseRepo.AddAsync(_user);
             var numberRowInserted = _unitOfWork.SaveChanges();
             if (numberRowInserted > 0)

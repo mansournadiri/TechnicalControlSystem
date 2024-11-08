@@ -14,6 +14,8 @@
     <link rel="stylesheet" href="~/landrik/css/tiny-slider.css" />
     <link href="~/landrik/css/style.min.css" rel="stylesheet" type="text/css" id="theme-opt" />
     <link href="~/landrik/css/colors/default.css" rel="stylesheet" id="color-opt">
+    <link href="~/assets/plugins/sweetalert2/dist/sweetalert2.min.css" rel="stylesheet">
+    <link href="~/css/site.css" rel="stylesheet" />
 </head>
 <body>
     <!-- Navbar STart -->
@@ -92,9 +94,11 @@
     <script src="~/landrik/js/switcher.js"></script>
     <script src="~/landrik/js/plugins.init.js"></script>
     <script src="~/landrik/js/app.js"></script>
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
     @if (IsSectionDefined("Scripts"))
     {
+        <script src="~/lib/jquery/dist/jquery.min.js"></script>
+        <script src="~/assets/plugins/sweetalert2/dist/sweetalert2.min.js"></script>
+        <script src="~/js/site.js"></script>
         @await RenderSectionAsync("Scripts", required: false)
     }
 </body>

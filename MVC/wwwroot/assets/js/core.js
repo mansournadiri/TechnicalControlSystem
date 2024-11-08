@@ -388,14 +388,6 @@
             }
         };
         
-        // Initilize iCkeck
-        this.initiCkeck = function(){
-            $("input:not(.normal)").iCheck({
-                checkboxClass: 'icheckbox_square-grey',
-                radioClass: 'iradio_square-grey'
-            });
-        };
-        
         // Handle numeric text inputs
         this.handleNumericInputs = function(){
             $(document).on("input", ".numeric", function() {
@@ -448,7 +440,6 @@ function escapeHtml(text) {
         Modiran.handleSwitchery();
         Modiran.handleScrollbars();
         Modiran.initiSwal();
-        Modiran.initiCkeck();
         Modiran.handleNumericInputs();
     });
     

@@ -28,37 +28,51 @@
                                         <label class="form-label">نام شرکت </label>
                                         <div class="form-icon position-relative">
                                             <i data-feather="user-check" class="fea icon-sm icons"></i>
-                                            <input type="text" class="form-control ps-5" placeholder="نام شرکت" name="companyName" required="">
+                                            <input type="text" class="form-control ps-5 check-need valid-empty" placeholder="نام شرکت" name="companyName" />
+                                            <div class="invalid-tooltip"></div>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="col-md-12">
                                     <div class="mb-3">
                                         <label class="form-label"> شناسه ملی شرکت: </label>
-                                        <input type="text" class="form-control" name="companyIdentity" placeholder="شناسه ملی" required="" >
+                                        <input type="text" class="form-control check-need valid-empty NumberValid" name="companyIdentity" placeholder="شناسه ملی" />
+                                        <div class="invalid-tooltip"></div>
                                     </div>
                                 </div><!--end col-->
                                 <div class="col-md-6">
-                                    <label class="form-label"> تلفن تماس نماینده  </label>
-                                    <input type="text" class="form-control" name="mobileNumber" placeholder="تلفن تماس" required="">
+                                    <div class="mb-3">
+                                        <label class="form-label"> تلفن تماس نماینده  </label>
+                                        <input type="text" class="form-control check-need valid-empty NumberValid" name="mobileNumber" placeholder="تلفن تماس" maxlength="11" />
+                                        <div class="invalid-tooltip"></div>
+                                    </div>
+                                </div><!--end col-->
+                                <div class="col-md-6">
+                                    <div class="mb-3">
+                                        <label class="form-label"> کدملی نماینده  </label>
+                                        <input type="text" class="form-control check-need valid-empty NumberValid" name="nationalId" placeholder="کد ملی نماینده" maxlength="10" />
+                                        <div class="invalid-tooltip"></div>
+                                    </div>
                                 </div><!--end col-->
                                 <div class="col-md-12">
                                     <div class="mb-3">
-                                        <label class="form-label"> کدملی نماینده </label>
-                                        <input type="email" class="form-control" placeholder="ایمیل" name="email" required="">
+                                        <label class="form-label"> پست الکترونیکی </label>
+                                        <input type="email" class="form-control check-need valid-empty" placeholder="ایمیل" name="mailAddress" id="mailAddress" />
+                                        <div class="invalid-tooltip"></div>
                                     </div>
                                 </div>
                                 <div class="col-md-12">
                                     <div class="mb-3">
                                         <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" value="" id="lawCheckBox" name="lawCheckBox">
+                                            <input class="form-check-input" type="checkbox" id="lawCheckBox" name="lawCheckBox" />
                                             <label class="form-check-label" for="lawCheckBox">تایید میکنم <a href="#" class="text-primary">قوانین و مقررات را مطالعه و تیکت را فعال میکنم</a></label>
+                                            <div class="invalid-tooltip"></div>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="col-md-12">
                                     <div class="d-grid">
-                                        <button type="submit" class="btn btn-primary">اکنون ثبت نام کنید</button>
+                                        <button type="submit" class="btn btn-primary">ثبت نام</button>
                                     </div>
                                 </div>
                             </div>
@@ -307,27 +321,56 @@
         </div><!--end row-->
     </div>
 </section><!--end section-->
-@section Scripts {
+@section Scripts
+{
     <script type="text/javascript">
-        $("#login-form").on("submit", function(e)
+        $("#login-form").on("submit", function (e) 
         {
             e.preventDefault();
-            var values = {};
-            $.each($(this).serializeArray(), function(i, field) {
-                values[field.name] = field.value;
+            $('.check-need').each(function (i, obj) {
+                checkItem($(obj));
             });
-            $.ajax({
-                type: "POST",
-                url: "/Auth/Register",
-                data: JSON.stringify(values),
-                contentType: "application/json"
-            })
-            .done(function(data, textStatus, jqXHR){
-                console.log("Ajax completed: " + data);
-            })
-            .fail(function(jqXHR, textStatus, errorThrown){
-                console.log("Ajax problem: " + textStatus + ". " + errorThrown);
-            });
+            if ($('.is-invalid').length === 0) {
+                var formData = new FormData();
+                $.each($(this).serializeArray(), function (i, field) {
+                    formData.append(`${field.name}`, field.value);
+                });
+                console.log(formData);
+                $.ajax({
+                    type: "POST",
+                    data: formData,
+                    processData: false,
+                    contentType: false,
+                    url: "/Auth/Register",
+                    success: function (data) {
+                        console.log(data);
+                        if (data.succeeded)
+                        {
+                            swal(
+                                'انجام گردید.',
+                                data.message,
+                                'success');
+                        }
+                        else
+                        {
+                            swal(
+                                'ناموفق',
+                                data.message,
+                                'error');
+                        }
+                    },
+                    error: function () {
+                        swal(
+                            'ناموفق',
+                            'در اجرای دستورات خطایی رخ داده است.',
+                            'error');
+                    }
+                }).done(function (data, textStatus, jqXHR) {
+                    //console.log("Ajax completed: " + data);
+                }).fail(function (jqXHR, textStatus, errorThrown) {
+                    //console.log("Ajax problem: " + textStatus + ". " + errorThrown);
+                });
+            }
         });
     </script>
 }
