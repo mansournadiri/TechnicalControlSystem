@@ -4,5 +4,6 @@
     {
         public Guid guid { get; set; }
         public int UserId { get; set; }
+        public string? jwtToken { get; set; }
     }
 }
