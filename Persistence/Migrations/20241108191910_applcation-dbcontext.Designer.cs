@@ -12,8 +12,8 @@ using Persistence.Context;
 namespace Persistence.Migrations
 {
     [DbContext(typeof(ApplicationDBContext))]
-    [Migration("20241106180107_CreateDatabase")]
-    partial class CreateDatabase
+    [Migration("20241108191910_applcation-dbcontext")]
+    partial class applcationdbcontext
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -81,7 +81,8 @@ namespace Persistence.Migrations
                         .ValueGeneratedOnAddOrUpdate()
                         .HasColumnType("rowversion");
 
-                    b.HasKey("LookupId");
+                    b.HasKey("LookupId")
+                        .HasName("PK_SYS_Lookup");
 
                     b.ToTable("Lookup", "SYS3");
                 });
@@ -114,6 +115,9 @@ namespace Persistence.Migrations
                     b.Property<string>("CompanyCode")
                         .HasMaxLength(20)
                         .HasColumnType("nvarchar(20)");
+
+                    b.Property<string>("CompanyIdentity")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("CompanyName")
                         .HasMaxLength(100)
@@ -338,9 +342,40 @@ namespace Persistence.Migrations
                         .HasDefaultValueSql("(newid())");
 
                     b.HasKey("UserId")
-                        .HasName("PK_Co_Users");
+                        .HasName("PK_BSE_User");
 
                     b.ToTable("User", "BSE");
+                });
+
+            modelBuilder.Entity("Domain.Entity.VerificationCode", b =>
+                {
+                    b.Property<int>("verificationId")
+                        .HasColumnType("int")
+                        .HasColumnName("verificationId");
+
+                    b.Property<string>("code")
+                        .IsRequired()
+                        .HasMaxLength(6)
+                        .HasColumnType("nvarchar(6)");
+
+                    b.Property<DateTime?>("creationDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("expriation")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("mobileNumber")
+                        .IsRequired()
+                        .HasMaxLength(13)
+                        .HasColumnType("nvarchar(13)");
+
+                    b.Property<int?>("verificationType")
+                        .HasColumnType("int");
+
+                    b.HasKey("verificationId")
+                        .HasName("PK_HSE_VerificationCode");
+
+                    b.ToTable("VerificationCode", "SYS3");
                 });
 #pragma warning restore 612, 618
         }

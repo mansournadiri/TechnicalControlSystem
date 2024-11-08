@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Persistence.Migrations
 {
     /// <inheritdoc />
-    public partial class CreateDatabase : Migration
+    public partial class applcationdbcontext : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -42,7 +42,7 @@ namespace Persistence.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Lookup", x => x.LookupID);
+                    table.PrimaryKey("PK_SYS_Lookup", x => x.LookupID);
                 });
 
             migrationBuilder.CreateTable(
@@ -71,12 +71,13 @@ namespace Persistence.Migrations
                     IssuanceDate = table.Column<DateTime>(type: "datetime", nullable: true),
                     IssuancePlaceRef = table.Column<long>(type: "bigint", nullable: true),
                     CompanyCode = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: true),
+                    CompanyIdentity = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    CompanyName = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: true),
                     Abbreviation = table.Column<string>(type: "nchar(10)", fixedLength: true, maxLength: 10, nullable: true),
                     EconomicCode = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: true),
                     CompanyType = table.Column<int>(type: "int", nullable: true),
                     ActivityType = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
                     Website = table.Column<string>(type: "nvarchar(30)", maxLength: 30, nullable: true),
-                    CompanyName = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: true),
                     Type = table.Column<int>(type: "int", nullable: false),
                     Version = table.Column<byte[]>(type: "rowversion", rowVersion: true, nullable: false),
                     FirstName_EN = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
@@ -126,7 +127,24 @@ namespace Persistence.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Co_Users", x => x.UserID);
+                    table.PrimaryKey("PK_BSE_User", x => x.UserID);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "VerificationCode",
+                schema: "SYS3",
+                columns: table => new
+                {
+                    verificationId = table.Column<int>(type: "int", nullable: false),
+                    mobileNumber = table.Column<string>(type: "nvarchar(13)", maxLength: 13, nullable: false),
+                    creationDate = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    expriation = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    code = table.Column<string>(type: "nvarchar(6)", maxLength: 6, nullable: false),
+                    verificationType = table.Column<int>(type: "int", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_HSE_VerificationCode", x => x.verificationId);
                 });
         }
 
@@ -144,6 +162,10 @@ namespace Persistence.Migrations
             migrationBuilder.DropTable(
                 name: "User",
                 schema: "BSE");
+
+            migrationBuilder.DropTable(
+                name: "VerificationCode",
+                schema: "SYS3");
         }
     }
 }
