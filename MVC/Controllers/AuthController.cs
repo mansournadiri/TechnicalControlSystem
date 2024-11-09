@@ -1,6 +1,7 @@
 ﻿using Application.Feature.Auth.Request.Command;
 using Domain.AppMetaData;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using NuGet.Protocol;
 
@@ -50,6 +51,8 @@ namespace MVC.Controllers
             ViewData["Title"] = "کد اعتبارسنجی";
             var jwtToken = _contextAccessor.HttpContext?.Request.Cookies[CustomClaimTypes.XAccessToken] ?? string.Empty;
             var guid = _contextAccessor.HttpContext?.Request.Cookies[CustomClaimTypes.guid] ?? string.Empty;
+            if (string.IsNullOrWhiteSpace(jwtToken))
+                return Redirect("/notFound404");
             return View();
         }
         [HttpPost]

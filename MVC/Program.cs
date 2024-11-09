@@ -1,6 +1,7 @@
 using Application;
 using Persistence;
 using Common;
+using System.Security.Policy;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -26,10 +27,14 @@ app.UseAuthorization();
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Landing}/{id?}");
-
+app.MapControllerRoute(
+    name: "notFound404",
+    pattern: "notFound404",
+    defaults: new { controller = "Error", action = "notFound404" });
 app.MapControllerRoute(
   name: "profile",
   pattern: "{area=Profile}/{controller=Home}/{action=Dashboard}/{id?}"
 );
+
 
 app.Run();

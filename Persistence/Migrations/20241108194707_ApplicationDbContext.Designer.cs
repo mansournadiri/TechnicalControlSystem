@@ -12,8 +12,8 @@ using Persistence.Context;
 namespace Persistence.Migrations
 {
     [DbContext(typeof(ApplicationDBContext))]
-    [Migration("20241108191910_applcation-dbcontext")]
-    partial class applcationdbcontext
+    [Migration("20241108194707_ApplicationDbContext")]
+    partial class ApplicationDbContext
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -355,8 +355,7 @@ namespace Persistence.Migrations
 
                     b.Property<string>("code")
                         .IsRequired()
-                        .HasMaxLength(6)
-                        .HasColumnType("nvarchar(6)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime?>("creationDate")
                         .HasColumnType("datetime2");
@@ -366,8 +365,7 @@ namespace Persistence.Migrations
 
                     b.Property<string>("mobileNumber")
                         .IsRequired()
-                        .HasMaxLength(13)
-                        .HasColumnType("nvarchar(13)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int?>("verificationType")
                         .HasColumnType("int");

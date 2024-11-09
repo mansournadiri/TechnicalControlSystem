@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Persistence.Migrations
 {
     /// <inheritdoc />
-    public partial class applcationdbcontext : Migration
+    public partial class ApplicationDbContext : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -136,10 +136,10 @@ namespace Persistence.Migrations
                 columns: table => new
                 {
                     verificationId = table.Column<int>(type: "int", nullable: false),
-                    mobileNumber = table.Column<string>(type: "nvarchar(13)", maxLength: 13, nullable: false),
+                    mobileNumber = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     creationDate = table.Column<DateTime>(type: "datetime2", nullable: true),
                     expriation = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    code = table.Column<string>(type: "nvarchar(6)", maxLength: 6, nullable: false),
+                    code = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     verificationType = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
